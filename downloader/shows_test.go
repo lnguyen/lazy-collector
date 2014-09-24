@@ -34,7 +34,8 @@ func TestIsDownloadableShow(t *testing.T) {
 		Convey("Test show is downloadable", t, func() {
 			var shows Shows
 			shows = tt.shows
-			So(shows.IsDownloadableShow(tt.title), ShouldEqual, tt.expected)
+			isDownloadable, _ := shows.IsDownloadableShow(tt.title)
+			So(isDownloadable, ShouldEqual, tt.expected)
 		})
 	}
 }

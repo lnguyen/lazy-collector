@@ -6,8 +6,10 @@ import (
 	"log"
 	"time"
 
+	"github.com/longnguyen11288/lazy-collector/cleaner"
 	"github.com/longnguyen11288/lazy-collector/config"
 	"github.com/longnguyen11288/lazy-collector/downloader"
+	"github.com/longnguyen11288/lazy-collector/extractor"
 )
 
 var configFile string
@@ -19,12 +21,11 @@ func main() {
 	if err != nil {
 		log.Fatalf("Unable to parse config: %s\n", err)
 	}
-	fmt.Println(collectorConfig)
-
-	collectorConfig.Log.Info("Parsed config")
+	fmt.Println(collectorConfig.TransmissionClient.GetTorrents())
 	go downloader.Run(collectorConfig)
-	collectorConfig.Log.Info("Ran downloader")
+	go extractor.Run(collectorConfig)
+	go cleaner.Run(collectorConfig)
 	for {
-		time.Sleep(5 * time.Minute)
+		time.Sleep(time.Duration(collectorConfig.Sleep) * time.Minute)
 	}
 }

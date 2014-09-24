@@ -18,6 +18,8 @@ type Config struct {
 	Transmission       Tranmission                      `json:"tranmission"`
 	OutputDir          string                           `json:"output_dir"`
 	DownloadDir        string                           `json:"download_dir"`
+	Sleep              int                              `json:"sleep"`
+	SeedRatio          float64                          `json:"seed_ratio"`
 }
 
 //Tranmission client for handling torrents

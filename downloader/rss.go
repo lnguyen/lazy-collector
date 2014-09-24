@@ -3,17 +3,19 @@ package downloader
 import (
 	"regexp"
 	"strconv"
+	"time"
 
 	"github.com/SlyMarbo/rss"
 )
 
 //RssFeedItem is an item in feed
 type RssFeedItem struct {
-	title   string
-	Link    string
-	Show    string
-	Season  int
-	Episode int
+	title     string
+	Link      string
+	Show      string
+	Season    int
+	Episode   int
+	TimeAdded time.Time
 }
 
 //GetShowData determines Season/Episode

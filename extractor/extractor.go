@@ -1,6 +1,7 @@
 package extractor
 
 import (
+	"os"
 	"os/exec"
 	"path/filepath"
 	"time"
@@ -24,12 +25,15 @@ func Run(collectorConfig *config.Config) {
 		}
 		for _, torrent := range torrents {
 			if torrent.PercentDone == 1 {
-				torrentPath := filepath.Join(torrent.DownloadDir, torrent.Name) + "/*.rar"
-				_, err := exec.Command("unrar", "e", "-y", torrentPath, collectorConfig.OutputDir).Output()
-				if err != nil {
-					Log.Errorf("Error running extract command %s", err)
+				mkvFile := filepath.Join(collectorConfig.OutputDir, torrent.Name) + ".mkv"
+				if _, err := os.Stat(mkvFile); err != nil {
+					torrentPath := filepath.Join(torrent.DownloadDir, torrent.Name) + "/*.rar"
+					_, err := exec.Command("unrar", "e", "-y", torrentPath, collectorConfig.OutputDir).Output()
+					if err != nil {
+						Log.Errorf("Error running extract command %s", err)
+					}
+					Log.Infof("Extracting %s", torrent.Name)
 				}
-				Log.Infof("Extracting %s", torrent.Name)
 			}
 		}
 		Log.Debug("Finished Extractor run")

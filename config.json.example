@@ -1,0 +1,13 @@
+{
+  "rss": [ "http://myrss"],
+  "tranmission": {
+    "url": "http://192.168.1.5",
+    "username": "username",
+    "password": "pass"
+  },
+  "shows": ["south park", "Marvels Agents of S H I E L D"],
+  "output_dir": "/home/lnguyen/tv/",
+  "download_dir": "/home/lnguyen/lazy-torrents",
+  "sleep": 5,
+  "seed_ratio": 0.2
+}

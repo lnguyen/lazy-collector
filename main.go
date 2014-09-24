@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"time"
 
@@ -21,7 +20,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("Unable to parse config: %s\n", err)
 	}
-	fmt.Println(collectorConfig.TransmissionClient.GetTorrents())
 	go downloader.Run(collectorConfig)
 	go extractor.Run(collectorConfig)
 	go cleaner.Run(collectorConfig)

@@ -27,6 +27,6 @@ func Run(collectorConfig *config.Config) {
 			}
 		}
 		Log.Debug("Finished Cleaner run")
-		time.Sleep(3 * time.Minute)
+		time.Sleep(1 * time.Minute)
 	}
 }

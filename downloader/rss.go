@@ -22,8 +22,12 @@ type RssFeedItem struct {
 func (r *RssFeedItem) GetShowData() {
 	re, _ := regexp.Compile(`S(\d+)E(\d+)`) // want to know what is in front of 'at'
 	res := re.FindAllStringSubmatch(r.title, -1)
-	r.Season, _ = strconv.Atoi(res[0][1])
-	r.Episode, _ = strconv.Atoi(res[0][2])
+	if len(res) > 0 {
+		if len(res[0]) > 1 {
+			r.Season, _ = strconv.Atoi(res[0][1])
+			r.Episode, _ = strconv.Atoi(res[0][2])
+		}
+	}
 }
 
 //Feeds returns list of items in feed
